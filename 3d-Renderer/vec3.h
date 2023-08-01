@@ -43,7 +43,41 @@ public:
 	double e[3];
 };
 
-
+inline std::ostream& operator<<(std::ostream &out, const vec3 h) {
+	return out << h.e[0] << " " << h.e[1] << " " << h.e[2];
+}
+inline vec3 operator+(const vec3& i, const vec3& j){
+	return vec3(i.e[0] + j.e[0], i.e[1] + j.e[1], i.e[2] + j.e[2]);
+}
+inline vec3 operator-(const vec3& i, const vec3& j) {
+	return vec3(i.e[0] - j.e[0], i.e[1] - j.e[1], i.e[2] - j.e[2]);
+}
+inline vec3 operator*(const vec3& i, const vec3& j) {
+	return vec3(i.e[0] * j.e[0], i.e[1] * j.e[1], i.e[2] * j.e[2]);
+}
+inline vec3 operator*(double t,const vec3& i) {
+	return vec3(t*i.e[0], t*i.e[1], t*i.e[2]);
+}
+inline vec3 operator*(const vec3& i, double t) {
+	return t * i;
+}
+inline vec3 operator/(const vec3& i, double t) {
+	return (i * 1 / t);
+}
+inline double dot(const vec3& i, const vec3& j) {
+	return (i.e[0] * j.e[0],
+		+i.e[1] * j.e[1]
+		+ i.e[2] * j.e[2]
+		);
+}
+inline vec3 cross(const vec3& u, const vec3& v) {
+	return vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
+		u.e[2] * v.e[0] - u.e[0] * v.e[2],
+		u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+}
+inline vec3 dot_product(const vec3& i) {
+	return i / i.length();
+}
 //type aliases for 3d point and rgb color
 using point3 = vec3;
 using color = vec3;
