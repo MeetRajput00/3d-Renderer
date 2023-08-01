@@ -33,7 +33,7 @@ public:
 	vec3& operator/=(const double t) {
 		return *this *= 1 / t;
 	}
-	double length() const {
+	double magnitude() const {
 		return sqrt(length_squared());
 	}
 	double length_squared() const {
@@ -62,7 +62,7 @@ inline vec3 operator*(const vec3& i, double t) {
 	return t * i;
 }
 inline vec3 operator/(const vec3& i, double t) {
-	return (i * 1 / t);
+	return vec3(i.x() / t, i.y() / t, i.z() / t);
 }
 inline double dot(const vec3& i, const vec3& j) {
 	return (i.e[0] * j.e[0],
@@ -76,7 +76,7 @@ inline vec3 cross(const vec3& u, const vec3& v) {
 		u.e[0] * v.e[1] - u.e[1] * v.e[0]);
 }
 inline vec3 dot_product(const vec3& i) {
-	return i / i.length();
+	return i / i.magnitude();
 }
 //type aliases for 3d point and rgb color
 using point3 = vec3;
