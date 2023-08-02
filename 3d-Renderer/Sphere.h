@@ -1,0 +1,39 @@
+#pragma once
+#ifndef SPHERE_H
+#define SPHERE_H
+
+#include"hittable.h"
+#include"vec3.h"
+
+class Sphere :Hittable {
+public:
+	Sphere(){}
+	Sphere(point3 cen, double r) : center(cen), radius(r) {};
+	virtual bool hit(const Ray& r, double t_max, double t_min, hit_record& rec) const override;
+public:
+	point3 center;
+	double radius;
+};
+bool Sphere::hit(const Ray& r, double t_max, double t_min, hit_record& rec) const {
+	vec3 oc = r.origin() - center;
+	auto a = r.direction().length_squared();
+	auto b = dot(oc, r.direction());
+	auto c = oc.length_squared() - radius * radius;
+	auto discriminant = b * b - a * c;
+	if (discriminant < 0)
+		return false;
+	auto sqrtd = sqrt(discriminant);
+
+	auto root = (-b - sqrtd) / a;
+	if (root < t_min || t_max < root) {
+		root = (-b + sqrtd) / a;
+		if (root < t_min || t_max < root)
+			return false;
+	}
+	rec.t = root;
+	rec.p = r.at(rec.t);
+	rec.normal = (rec.p - center) / radius;
+	return true;
+}
+
+#endif // !SPHERE_H

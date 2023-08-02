@@ -2,6 +2,7 @@
 #include"color.h"
 #include"vec3.h"
 #include"ray.h"
+#include"Sphere.h"
 double hit_sphere(const point3& center, double radius, const Ray& r);
 color ray_color(const Ray& r) {
 	auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
