@@ -2,21 +2,37 @@
 #include"color.h"
 #include"vec3.h"
 #include"ray.h"
+double hit_sphere(const point3& center, double radius, const Ray& r);
 color ray_color(const Ray& r) {
+	auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
+	if (t > 0.0) {
+		vec3 N = dot_product(r.at(t) - vec3(0, 0, -1));
+		return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);
+	}
 	vec3 unit_direction = dot_product(r.direction());
-	auto t = 0.5 * (unit_direction.y() + 1.0);
+	t = 0.5 * (unit_direction.y() + 1.0);
 	return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
+}
+double hit_sphere(const point3& center, double radius, const Ray& r) {
+	vec3 oc = r.origin() - center;
+	auto a = r.direction().length_squared();
+	auto b = dot(oc, r.direction());
+	auto c = oc.length_squared() - radius * radius;
+	auto discriminant = b * b - a * c;
+	if (discriminant < 0)
+		return -1.0;
+	return (-b - sqrt(discriminant)) / a;
 }
 int main() {
 	//image 
 	const auto aspect_ratio = 16.0 / 9.0;
 	const int image_width = 256;
-	const int image_height = static_cast<int>(image_width * aspect_ratio);
+	const int image_height = image_width;
 
 	//camera
 
 	auto viewport_height = 2.0;
-	auto viewport_width = aspect_ratio * viewport_height;
+	auto viewport_width = viewport_height;
 	auto focal_length = 1.0;
 
 	auto origin = point3(0, 0, 0);
