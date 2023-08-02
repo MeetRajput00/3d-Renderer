@@ -1,5 +1,6 @@
 # Ray Tracing in C++
 
+(Currently in Development)
 This repository contains my implementation of the Ray Tracing algorithm in C++, allowing for the rendering of 3D objects. I am using the book "Ray Tracing in One Weekend" as a guide to build this project.
 
 ## Installation
