@@ -130,12 +130,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="color.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Common_Constants.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="Hittable_list.h" />
-    <ClInclude Include="ray.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="Sphere.h" />
-    <ClInclude Include="vec3.h" />
+    <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

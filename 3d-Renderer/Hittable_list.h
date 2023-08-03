@@ -18,13 +18,13 @@ public:
 	void clear() { objects.clear(); }
 	void add(shared_ptr<Hittable> obj) { objects.push_back(obj); }
 
-	virtual bool hit(const Ray& r, double t_max, double t_min, hit_record& rec) const override;
+	virtual bool hit(const Ray& r, double t_max, double t_min, Hit_Record& rec) const override;
 	
 public:
 	vector<shared_ptr<Hittable>> objects;
 };
-bool Hittable_List::hit(const Ray& r, double t_max, double t_min, hit_record& rec) const {
-	hit_record temp_rec;//not sure about this--hit_record &temp_rec=rec; i think this should be here
+bool Hittable_List::hit(const Ray& r, double t_max, double t_min, Hit_Record& rec) const {
+	Hit_Record temp_rec;//not sure about this--hit_record &temp_rec=rec; i think this should be here
 	bool hit_anything = false;
 	double closest_so_far = t_max;
 	for(const auto& object:objects) {
