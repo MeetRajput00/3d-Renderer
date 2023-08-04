@@ -24,11 +24,12 @@ public:
 	vector<shared_ptr<Hittable>> objects;
 };
 bool Hittable_List::hit(const Ray& r, double t_max, double t_min, Hit_Record& rec) const {
-	Hit_Record temp_rec;//not sure about this--hit_record &temp_rec=rec; i think this should be here
+	Hit_Record temp_rec;
 	bool hit_anything = false;
 	double closest_so_far = t_max;
-	for(const auto& object:objects) {
-		if (object->hit(r, t_max, closest_so_far, temp_rec)) {
+	for(const auto& object:objects) 
+	{
+		if (object->hit(r, closest_so_far,t_min , temp_rec)) {
 			hit_anything=true;
 			closest_so_far = temp_rec.t;
 			rec = temp_rec;

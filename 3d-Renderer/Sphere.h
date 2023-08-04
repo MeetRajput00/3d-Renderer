@@ -5,7 +5,7 @@
 #include"hittable.h"
 #include"vec3.h"
 
-class Sphere :Hittable {
+class Sphere :public Hittable {
 public:
 	Sphere() {}
 	Sphere(Point3 cen, double r) : center(cen), radius(r) {};
