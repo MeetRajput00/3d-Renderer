@@ -94,6 +94,9 @@ Vec3 random_in_unit_sphere() {
 		return p;
 	}
 }
+Vec3 random_unit_vector() {
+	return dot_product(random_in_unit_sphere());
+}
 //type aliases for 3d point and rgb color
 using Point3 = Vec3;
 using Color = Vec3;
