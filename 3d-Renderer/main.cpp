@@ -4,11 +4,14 @@
 #include"Hittable_list.h"
 #include"Sphere.h"
 #include"Camera.h"
-Color ray_color(const Ray& r, const Hittable& world) {
+Color ray_color(const Ray& r, const Hittable& world,int depth) {
+	if (depth < 0)
+		return Color(0, 0, 0);
 	Hit_Record rec;
 	if (world.hit(r, infinity, 0, rec)) 
 	{
-		return 0.5 * (rec.normal + Color(1, 1, 1));
+		Vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+		return 0.5*ray_color(Ray(rec.p, target - rec.p), world,depth-1);
 	}
 	Vec3 unit_direction = dot_product(r.direction());
 	auto t = 0.5 * (unit_direction.y() + 1.0);
@@ -23,6 +26,7 @@ int main() {
 	const int image_width = 256;
 	const int image_height = image_width;
 	const int samples_per_pixel = 100;
+	const int max_depth = 50;
 
 	//camera
 	Camera cam;
@@ -35,7 +39,7 @@ int main() {
 			for (int k = 0; k < samples_per_pixel; k++) {
 				auto u = double(i+random_double()) / (image_width - 1);
 				auto v = double(j+ random_double()) / (image_height - 1);
-				pixel_color += ray_color(cam.get_ray(u, v), world);
+				pixel_color += ray_color(cam.get_ray(u, v), world,max_depth);
 			}
 			write_color(std::cout, pixel_color,samples_per_pixel);
 		}
