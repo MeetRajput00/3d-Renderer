@@ -3,7 +3,7 @@
 #include"color.h"
 #include"Hittable_list.h"
 #include"Sphere.h"
-Color ray_color(const Ray& r, const Hittable_List& world) {
+Color ray_color(const Ray& r, const Hittable& world) {
 	Hit_Record rec;
 	if (world.hit(r, infinity, 0, rec)) 
 	{
