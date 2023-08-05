@@ -8,7 +8,7 @@ Color ray_color(const Ray& r, const Hittable& world,int depth) {
 	if (depth < 0)
 		return Color(0, 0, 0);
 	Hit_Record rec;
-	if (world.hit(r, infinity, 0, rec)) 
+	if (world.hit(r, infinity, 0.001, rec)) 
 	{
 		Vec3 target = rec.p + rec.normal + random_in_unit_sphere();
 		return 0.5*ray_color(Ray(rec.p, target - rec.p), world,depth-1);
