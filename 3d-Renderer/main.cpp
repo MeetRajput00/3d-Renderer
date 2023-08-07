@@ -10,8 +10,8 @@ Color ray_color(const Ray& r, const Hittable& world,int depth) {
 	Hit_Record rec;
 	if (world.hit(r, infinity, 0.001, rec)) 
 	{
-		Vec3 target = rec.p + rec.normal + random_unit_vector();
-		return 0.5*ray_color(Ray(rec.p, target - rec.p), world,depth-1);
+		Vec3 target = rec.normal + random_unit_vector();
+		return 0.1*ray_color(Ray(rec.p, target), world,depth-1);
 	}
 	Vec3 unit_direction = dot_product(r.direction());
 	auto t = 0.5 * (unit_direction.y() + 1.0);
